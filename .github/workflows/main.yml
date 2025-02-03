@@ -1,0 +1,54 @@
+name: Maven Build and Goals Execution
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  maven-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up JDK 11
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+
+      - name: Install Maven
+        run: sudo apt-get install maven
+
+      - name: Build Maven Project
+        run: mvn clean install
+
+      - name: Execute Maven Validate Goal
+        run: mvn validate
+
+      - name: Execute Maven Compile Goal
+        run: mvn compile
+
+      - name: Execute Maven Test Goal
+        run: mvn test
+
+      - name: Execute Maven Package Goal
+        run: mvn package
+
+      - name: Execute Maven Verify Goal
+        run: mvn verify
+
+      - name: Execute Maven Install Goal
+        run: mvn install
+
+      - name: Execute Maven Deploy Goal
+        run: mvn deploy
+
+      - name: Execute Maven Site Goal
+        run: mvn site
+
+      - name: Execute Maven Clean Goal
+        run: mvn clean
